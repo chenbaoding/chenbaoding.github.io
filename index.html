@@ -277,7 +277,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/09/18/toyBrowser_3/" itemprop="url">技术分享：2.自制一个迷你浏览器(编码篇)</a></h2>
+                <a class="post-title-link" href="/2020/09/18/toyBrowser_3/" itemprop="url">技术分享：3.自制一个迷你浏览器(编码篇)</a></h2>
         
 
         <div class="post-meta">
@@ -329,7 +329,7 @@
       
         
           
-            <p>第一步，实现一个HTTP请求（编写server.js,client.js）<br>1.设计一个HTTP请求类<br>2.content type 必要字段需要有默认值，其他status line 就不多赘述了<br>注意：通过两个十六进制数字，其中第一位任意，第二位为0来得到一个空的chunk来标记结束<br>第二步，编写send函数<br>1.在Request的构造器中收集必要的信息<br>2.设计一个send函数把请求真实发送给服务器<br>3.send函数要异步，返回Promise<br>第三步，responseParser，render<br>1.response必须分段构造，所以要用一个responseParser来装配。<br>2.responseParser分段处理ResponseText，我们用状态机来分级文本结构。<br>3.利用FSM来实现HTML的分析<br>4.在HTML中已经规定了其中状态<br>5.<a src="html.spec.whatwg.org/multipage">采用部分状态</a><br>6.parser解析tag,在标签结束时提交token<br>7.处理属性并将其挂载到Dom节点,属性有单引号，双引号，无引号三种写法因此需要较多状态处理，处理属性的方法和标签类似，属性结束时把他添加到token上<br>8.词法分析结束后便是语法分析，HTML的语法分析相对简单，当然，为了实现相对简单，通过token（一个栈）构建DOM树<br>9.开始标签时创建元素并入栈，遇到结束标签时出栈<br>10.自封闭节点可视为入栈后立刻出栈<br>11.任何元素的父元素是它入栈前的栈顶<br>12.将文本节点放到DOM树<br>13.CSS的计算，通过css parser 抽出CSS规则 降低工作量，其实是和DOM树构建时候一起发生的 (addCSSRules)<br>14.遇到style标签时，把CSS规则保存起来<br>15.用CSS Parser来分析CSS规则<br>16.将选择器与元素匹配<br>17.生成computed属性(declaration)<br>18.排优先级 specificity [inline,id,class,tag] 采取进位置<br>19.布局，排版，采用flex，第一代正常流太古典，flex比较符合人类思维，容易实现，兼容性高，grid，功能更强大，hourindin……第四代好好看好好学flex-direction:column。根据主轴尺寸分行，若设置了no-wrap，则强行分配进第一行，剩余空间是负数则等比例压缩。<br>20.绘制DOM树</p>
+            <p>第一步，实现一个HTTP请求（编写server.js,client.js）<br>1.设计一个HTTP请求类<br>2.content type 必要字段需要有默认值，其他status line 就不多赘述了<br>注意：通过两个十六进制数字，其中第一位任意，第二位为0来得到一个空的chunk来标记结束<br>第二步，编写send函数<br>1.在Request的构造器中收集必要的信息<br>2.设计一个send函数把请求真实发送给服务器<br>3.send函数要异步，返回Promise<br>第三步，responseParser，render<br>1.response必须分段构造，所以要用一个responseParser来装配。<br>2.responseParser分段处理ResponseText，我们用状态机来分级文本结构。<br>3.利用FSM来实现HTML的分析<br>4.在HTML中已经规定了其中状态<br>5.<a src="https://html.spec.whatwg.org/multipage/">采用部分状态</a><br>6.parser解析tag,在标签结束时提交token<br>7.处理属性并将其挂载到Dom节点,属性有单引号，双引号，无引号三种写法因此需要较多状态处理，处理属性的方法和标签类似，属性结束时把他添加到token上<br>8.词法分析结束后便是语法分析，HTML的语法分析相对简单，当然，为了实现相对简单，通过token（一个栈）构建DOM树<br>9.开始标签时创建元素并入栈，遇到结束标签时出栈 <a src="https://www.bilibili.com/video/av540964359/">用栈构建DOM树</a><br>10.自封闭节点可视为入栈后立刻出栈<br>11.任何元素的父元素是它入栈前的栈顶<br>12.将文本节点放到DOM树<br>13.CSS的计算，通过css parser 抽出CSS规则 降低工作量，其实是和DOM树构建时候一起发生的 (addCSSRules)<br>14.遇到style标签时，把CSS规则保存起来<br>15.用CSS Parser来分析CSS规则<br>16.将选择器与元素匹配<br>17.生成computed属性(declaration)<br>18.排优先级 specificity [inline,id,class,tag] 采取进位置<br>19.布局，排版，采用flex，第一代正常流太古典，flex比较符合人类思维，容易实现，兼容性高，grid，功能更强大，hourindin……第四代好好看好好学flex-direction:column。根据主轴尺寸分行，若设置了no-wrap，则强行分配进第一行，剩余空间是负数则等比例压缩。<br>20.绘制DOM树</p>
 
           
         
