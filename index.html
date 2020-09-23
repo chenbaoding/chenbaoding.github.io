@@ -808,7 +808,8 @@ function kmp(source, pattern) {
         1.Callback
         2.Promise
         3.async/await
-        经典的callback(回调)模式存在层级嵌套的问题，如果你对node.js有一定了解一定会听过所谓的callback-hell(回调地狱）,增加了运行时间以及嵌套层级。是此前JavaScript唯一的异步处理方法
+        经典的callback(回调)模式存在层级嵌套的问题，如果你对node.js有一定了解一定会听过所谓的callback-hell(回调地狱）,增加了运行时间以及嵌套层级。是此前JavaScript唯一的异步处理方法。
+        promise则通过一种链式表达的方式代替了回调的方式。
         <div class="code-toolbar">    function go() {
         green()
         setTimeout(function(){
@@ -827,6 +828,26 @@ function kmp(source, pattern) {
                 setTimeout(resolve,t)
             })
         }
+        function go(){
+            green()
+            sleep(1000).then(() => {
+                yellow();
+                return sleep(200);
+            }).then(() => {
+                red();
+                return sleep(500);
+            }).then(go);
+        }
+    </div>
+    <div class="code-toolbar">
+    async function go(){
+        green();
+        await sleep(1000);
+        yellow();
+        await sleep(2000);
+        red();
+        await sleep(5000);
+    }
     </div>
     <div class="green"></div>
     <div class="red"></div>
