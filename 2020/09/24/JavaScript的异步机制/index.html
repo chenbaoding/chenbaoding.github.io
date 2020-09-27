@@ -79,14 +79,14 @@
 
 
 
-<meta name="description" content=".green .light{     background-color: green; } .yellow .light{     background-color: green; } .red .light{     background-color: green; }                JavaScript的异步机制                   1.Callback">
+<meta name="description" content=".green .light{     background-color: green; } .yellow .light{     background-color: green; } .red .light{     background-color: green; }                JavaScript的异步机制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript的异步机制">
-<meta property="og:url" content="http://yoursite.com/2020/07/07/JavaScript%E7%9A%84%E5%BC%82%E6%AD%A5%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/09/24/JavaScript%E7%9A%84%E5%BC%82%E6%AD%A5%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="Y.Y&#39;s BLOG">
-<meta property="og:description" content=".green .light{     background-color: green; } .yellow .light{     background-color: green; } .red .light{     background-color: green; }                JavaScript的异步机制                   1.Callback">
-<meta property="article:published_time" content="2020-07-07T06:06:04.000Z">
-<meta property="article:modified_time" content="2020-09-23T16:01:17.356Z">
+<meta property="og:description" content=".green .light{     background-color: green; } .yellow .light{     background-color: green; } .red .light{     background-color: green; }                JavaScript的异步机制">
+<meta property="article:published_time" content="2020-09-24T06:06:04.000Z">
+<meta property="article:modified_time" content="2020-09-25T05:40:11.981Z">
 <meta property="article:author" content="涯渊">
 <meta property="article:tag" content="异步">
 <meta name="twitter:card" content="summary">
@@ -119,7 +119,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/07/07/JavaScript的异步机制/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/09/24/JavaScript的异步机制/"/>
 
 
 
@@ -260,7 +260,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/07/JavaScript%E7%9A%84%E5%BC%82%E6%AD%A5%E6%9C%BA%E5%88%B6/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/24/JavaScript%E7%9A%84%E5%BC%82%E6%AD%A5%E6%9C%BA%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="涯渊">
@@ -289,8 +289,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-07T14:06:04+08:00">
-                2020-07-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-24T14:06:04+08:00">
+                2020-09-24
               </time>
             
 
@@ -330,8 +330,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/07/07/JavaScript%E7%9A%84%E5%BC%82%E6%AD%A5%E6%9C%BA%E5%88%B6/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2020/07/07/JavaScript%E7%9A%84%E5%BC%82%E6%AD%A5%E6%9C%BA%E5%88%B6/" itemprop="commentsCount"></span>
+                <a href="/2020/09/24/JavaScript%E7%9A%84%E5%BC%82%E6%AD%A5%E6%9C%BA%E5%88%B6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2020/09/24/JavaScript%E7%9A%84%E5%BC%82%E6%AD%A5%E6%9C%BA%E5%88%B6/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -375,50 +375,25 @@
         <title>JavaScript的异步机制</title>
     </header>
     <main>
-        1.Callback
-        2.Promise
-        3.async/await
-        经典的callback(回调)模式存在层级嵌套的问题，如果你对node.js有一定了解一定会听过所谓的callback-hell(回调地狱）,增加了运行时间以及嵌套层级。是此前JavaScript唯一的异步处理方法。
-        promise则通过一种链式表达的方式代替了回调的方式。
-        <div class="code-toolbar">    function go() {
-        green()
-        setTimeout(function(){
-            yellow()
-            setTimeout(function(){
-                red()
-                setTimeout(function(){
-                    go();
-                },5000)
-            },2000)
-        },10000)
-    }</div>
-    <div class="code-toolbar">
-        function sleep(t) {
-            return new Promise((resolve, reject) => {
-                setTimeout(resolve,t)
-            })
-        }
-        function go(){
-            green()
-            sleep(1000).then(() => {
-                yellow();
-                return sleep(200);
-            }).then(() => {
-                red();
-                return sleep(500);
-            }).then(go);
-        }
+        <div>
+            <h2>Asynchronous Callbacks</h2>
+            <p>经典的callback(回调)模式存在层级嵌套的问题，如果你对node.js有一定了解一定会听过所谓的callback-hell(回调地狱）,增加了运行时间以及嵌套层级。是此前JavaScript唯一的异步处理方法。</p>
+        <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">go</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    green()</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    yellow()</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        red()</span><br><span class="line">            setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            go();</span><br><span class="line">            &#125;,<span class="number">5000</span>)</span><br><span class="line">        &#125;,<span class="number">2000</span>)</span><br><span class="line">    &#125;,<span class="number">10000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  
+    </div>       
+    <div>
+        <h2>Promise</h2>
+        <p>promise则通过一种链式表达的方式代替了回调的方式。可在运行异步操作并等待其完全完成后再根据其结果运行另一项操作</p>
+        <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">t</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        setTimeout(resolve,t)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">go</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    green()</span><br><span class="line">    sleep(<span class="number">1000</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        yellow();</span><br><span class="line">        <span class="keyword">return</span> sleep(<span class="number">200</span>);</span><br><span class="line">    &#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        red();</span><br><span class="line">        <span class="keyword">return</span> sleep(<span class="number">500</span>);</span><br><span class="line">    &#125;).then(go);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
     </div>
-    <div class="code-toolbar">
-    async function go(){
-        green();
-        await sleep(1000);
-        yellow();
-        await sleep(2000);
-        red();
-        await sleep(5000);
-    }
+    <div>
+        <h2>async/await</h2>
+        <p>异步函数由<code>async</code>关键字定义。在一个异步函数中可以使用<code>await</code>关键字。<code>async</code>和<code>await</code>关键字可以使得对有等待时间的（异步），以<a class="code-underline" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="noopener"><code>Promise</code></a>为基础的函数的定义更加简洁优雅，减少特意配置对于<code>Promise</code>的链式调用。</p>
+        <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">go</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    green();</span><br><span class="line">    <span class="keyword">await</span> sleep(<span class="number">1000</span>);</span><br><span class="line">    yellow();</span><br><span class="line">    <span class="keyword">await</span> sleep(<span class="number">2000</span>);</span><br><span class="line">    red();</span><br><span class="line">    <span class="keyword">await</span> sleep(<span class="number">5000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
     </div>
+
     <div class="green"></div>
     <div class="red"></div>
     <div class="yellow"></div>
@@ -485,8 +460,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/07/%E5%8D%B4/" rel="next" title="却">
-                <i class="fa fa-chevron-left"></i> 却
+              <a href="/2020/09/18/toyBrowser_3/" rel="next" title="技术分享：3.自制一个迷你浏览器(编码篇)">
+                <i class="fa fa-chevron-left"></i> 技术分享：3.自制一个迷你浏览器(编码篇)
               </a>
             
           </div>
@@ -494,10 +469,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/09/15/toyBrowser_1/" rel="prev" title="技术分享：1.自制一个迷你版浏览器(原理科普篇)">
-                技术分享：1.自制一个迷你版浏览器(原理科普篇) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -556,8 +527,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -617,6 +597,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Asynchronous Callbacks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">Promise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">async&#x2F;await</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
