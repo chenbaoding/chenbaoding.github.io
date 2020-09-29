@@ -1822,7 +1822,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #4b4d04;
+  background: #2db80d;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2607,7 +2607,7 @@ h6 {
   margin: 20px 0 10px;
 }
 p {
-  margin: 0 0 25px 0;
+  margin: 0 0 5px 0;
 }
 a {
   border-bottom-color: #ccc;
@@ -2615,6 +2615,18 @@ a {
 hr {
   margin: 20px 0;
   height: 2px;
+}
+ul {
+  margin: 0 0 5px 0;
+}
+code {
+  margin: 5px 0;
+}
+dd {
+  text-indent: 2em;
+}
+.text-indent-2 {
+  text-indent: 2em;
 }
 .main-inner {
   margin-top: 80px;

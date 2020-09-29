@@ -79,14 +79,14 @@
 
 
 
-<meta name="description" content="在动手制作前，先了解一下状态机的概念。状态机(Mealy)：    ·每一个状态都是一个机器    ·每一个机器都知道下一个状态        ·每个机器都有确定的下一个状态        ·根据输入决定下一个状态 let randomString &#x3D; &amp;apos;abxdcabcabcabcabxab&amp;apos;; let trueString &#x3D; &amp;apos;abcabx&amp;apos;; con">
+<meta name="description" content="在动手制作前，先了解一下状态机的概念。状态机(Mealy)：    ·每一个状态都是一个机器    ·每一个机器都知道下一个状态        ·每个机器都有确定的下一个状态        ·根据输入决定下一个状态">
 <meta property="og:type" content="article">
 <meta property="og:title" content="技术分享：2.自制一个迷你浏览器(状态机篇)">
 <meta property="og:url" content="http://yoursite.com/2020/09/16/toyBrowser_2/index.html">
 <meta property="og:site_name" content="Y.Y&#39;s BLOG">
-<meta property="og:description" content="在动手制作前，先了解一下状态机的概念。状态机(Mealy)：    ·每一个状态都是一个机器    ·每一个机器都知道下一个状态        ·每个机器都有确定的下一个状态        ·根据输入决定下一个状态 let randomString &#x3D; &amp;apos;abxdcabcabcabcabxab&amp;apos;; let trueString &#x3D; &amp;apos;abcabx&amp;apos;; con">
+<meta property="og:description" content="在动手制作前，先了解一下状态机的概念。状态机(Mealy)：    ·每一个状态都是一个机器    ·每一个机器都知道下一个状态        ·每个机器都有确定的下一个状态        ·根据输入决定下一个状态">
 <meta property="article:published_time" content="2020-09-16T15:06:04.000Z">
-<meta property="article:modified_time" content="2020-09-18T03:05:50.827Z">
+<meta property="article:modified_time" content="2020-09-29T02:23:59.471Z">
 <meta property="article:author" content="涯渊">
 <meta property="article:tag" content="技术分享">
 <meta name="twitter:card" content="summary">
@@ -338,79 +338,7 @@
 
       
         <p>在动手制作前，先了解一下状态机的概念。<br>状态机(Mealy)：<br>    ·每一个状态都是一个机器<br>    ·每一个机器都知道下一个状态<br>        ·每个机器都有确定的下一个状态<br>        ·根据输入决定下一个状态</p>
-<pre><code>let randomString = &apos;abxdcabcabcabcabxab&apos;;
-let trueString = &apos;abcabx&apos;;
-const checkString = (string, i) =&gt; {
-    let nextArr = [];
-    // 记录pattern数组
-    if (string.length - i &gt; trueString.length || string.length - i === trueString.length) {
-        // 剩余长度大于等于pattern字符串长度
-        for (let c = 0; c &lt; trueString.length; c++) {
-            if (c === trueString.length - 1 &amp;&amp; string[i + c] === trueString[c]) {
-                // 如果长度符合且最后一个匹配成功则返回true,前面匹配失败的会直接回到match函数
-                console.log(&apos;true&apos;,string[i + c],trueString[c])
-            }
-            if (string[i + c] === trueString[0]) {
-                // 开头
-                if (string.length - (i + c) &gt; trueString.length || string.length - (i + c) === trueString.length) {
-                    nextArr.push({&apos;hasNext&apos;: true, &apos;nextPosition&apos;: i+c, &apos;postionC&apos;: c,&apos;startPosition&apos; : i+c})
-                }
-            }
-            if (nextArr.length &gt; 0) {
-                for (let item of nextArr) {
-                    if ( string[item.nextPosition] === trueString[item.nextPosition - item.startPosition] &amp;&amp; item.hasNext ) {
-                        item.nextPosition ++;
-                    } else {
-                        item.hasNext = false;
-                    }
-                }
-            }
-            // 长度等于且最后一位正确则弹出true,前面匹配错误的话会直接return
-            if (string[i + c] !== trueString[c]) {
-                if (nextArr.length !== 0) {
-                    for (let item of nextArr) {
-                        if (item.hasNext) {
-                            return match(randomString,item.startPosition)
-                        }
-                    }
-                } else {
-                    return match(randomString, i + 1)
-                }
-            }
-        }
-    } else {
-        return console.log(&apos;false&apos;);
-    }
-}
-const match = (string, index) =&gt; {
-    let c = index ? index : 0;
-    console.log(&apos;mathcc&apos;,c)
-    if (string.length - c &gt; trueString.length || string.length - c === trueString.length) {
-        checkString(string, c)
-    } else {
-        return console.log(&apos;false&apos;)
-    }
-}
-console.log(match(randomString))
 
-function kmp(source, pattern) {
-    let i = 0, j = 0;
-    while( i&lt; source.length){
-        if(pattern[i] === pattern[j]){
-            ++ i , ++ j;
-        }else {
-            if( j &gt; 0) 
-                j = table[j];
-            else {
-                ++ i;
-            }
-        }
-        if (j === pattern.length) {
-            return true;
-        }
-    }
-    return false;
-}</code></pre>
       
     </div>
     
@@ -527,7 +455,7 @@ function kmp(source, pattern) {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -538,7 +466,7 @@ function kmp(source, pattern) {
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -549,7 +477,7 @@ function kmp(source, pattern) {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
