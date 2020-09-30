@@ -358,195 +358,582 @@
     em ~ span {
         color: blue;
     }
-    #showChildSelector p > span {
+    #show_child_selector p > span {
         background-color: DodgerBlue
     }
-    #showChildSelector span {
+    #show_child_selector span {
         background-color: white;
     }
+    #pseudo_classes a:link { color: blue; }
+    #pseudo_classes a:visited { color: purple; }
+    #pseudo_classes a:hover { background: yellow; }
+    #pseudo_classes a:active { color: red; }
+    #pseudo_classes :first-child { background: #f2efea; }
+    #pseudo_classes :first-of-type {background: green} 
+    #pseudo_classes :not(p) {text-decoration: underline}
+    #peseudo_elements_ul li {
+        list-style-type: none;
+        position: relative;
+        margin: 2px;
+        padding: 0.5em 0.5em 0.5em 2em;
+        background: lightgrey;
+        font-family: sans-serif;
+        }
+                  
+    #peseudo_elements_ul li.done {
+      background: #CCFF99;
+    }
     
+    #peseudo_elements_ul li.done::before {
+      content: '';
+      position: absolute;
+      border-color: #009933;
+      border-style: solid;
+      border-width: 0 0.3em 0.25em 0;
+      height: 1em;
+      top: 1.3em;
+      left: 0.6em;
+      margin-top: -1em;
+      transform: rotate(45deg);
+      width: 0.5em;
+    }
+    li.done::after {
+        content: " 加油吧骚年!";
+    }
 </style>
 <header>
     <title>关于CSS选择器</title>
 </header>
 <main>
     <div>
-        <h2>基础选择器 (Basic Selectors)</h2>
-        <ul>
-            <li>
-                <h5>元素选择器</h5>
-                <p>通过Node节点匹配元素,在单独使用时,寻找特定类型的元素时,元素选择器都会匹配该文档中所有此类型的元素.</p>
-                <pre>元素 {样式声明}</pre>
-            </li>
-            <li>
-                <h5>类选择器</h5>
-                <p>CSS类选择器会根据元素的类属性中的内容匹配元素，需要完全匹配，以空白分隔</p>
-                <pre>.类名 {样式声明}</pre>
-                <p>类选择器等同于下述：</p>
-                <pre>[class ~= 类名] {样式声明}</pre>
-            </li>
-            <li>
-                <h5>ID选择器</h5>
-                <p>根据元素中ID属性中的内容匹配元素，需要完全匹配</p>
-                <pre>#ID {样式声明}</pre>
-                <p>ID选择器等同于下述:</p>
-                <pre>[id = id属性的值] {样式声明}</pre>
-            </li>
-            <li>
-                <h5>通配选择器</h5>
-                <p>可以匹配任何HTML类型的元素，故可省略。在CSS3中，较经典的与命名空间搭配使用</p>
-                <ul>
-                    <li><code>a|*</code>会匹配a空间下的所有元素</li>
-                    <li><code>|*</code>会匹配所有无命名空间的元素</li>
-                </ul>
-            </li>
-            <li>
-                <h5>属性选择器</h5>
-                <p>根据属性中的内容匹配元素，需要属性值完全匹配</p>
-                <dl>
-                    <h6>语法</h6>
-                    <dt>
-                        <code>
-                            [<var>attr</var>]
-                        </code>
-                    </dt>
-                    <dd>表示带有以attr命名的属性的所有元素</dd>
-                    <dt>
-                        <code>
-                            [<var>attr</var>=<var>value</var>]
-                        </code>
-                    </dt>
-                    <dd>
-                        表示带有以attr命名的属性且值等于value的所有元素
-                    </dd>
-                    <dt>
-                        <code>
-                            [<var>attr</var>~=<var>value</var>]
-                        </code>
-                    </dt>
-                    <dd>
-                        表示带有以attr命名的属性，value是以空白分隔的值列表，匹配HTML中该属性的值是值列表之一的元素，例如class,className(类属性选择器)
-                    </dd>
-                    <dt>
-                        <code>
-                            [<var>attr</var>|=<var>value</var>]
-                        </code>
-                    </dt>
-                    <dd>
-                        表示带有以attr命名的属性，value是value或者以value-为前缀的值，例如匹配zh-CN,zh-TW,其中zh可以作为上述value
-                    </dd>
-                    <dt>
-                        <code>
-                            [<var>attr</var>^=<var>value</var>]
-                        </code>
-                    </dt>
-                    <dd>
-                        表示带有以attr命名的属性，value是value为前缀的值，例如匹配zh-CN,zh-TW,其中zh可以作为上述value
-                    </dd>
-                    <dt>
-                        <code>
-                            [<var>attr</var>$=<var>value</var>]
-                        </code>
-                    </dt>
-                    <dd>
-                        表示带有以attr命名的属性，value是value为前缀的值，例如匹配abc,acbc,其中bc可以作为上述value
-                    </dd>
-                    <dt>
-                        <code>
-                            [<var>attr</var>$=<var>value</var>]
-                        </code>
-                    </dt>
-                    <dd>
-                        表示带有以attr命名的属性，value是value为后缀的值，例如匹配abc,acbc,其中bc可以作为上述value
-                    </dd>
-                    <dt>
-                        <code>
-                            [<var>attr</var>*=<var>value</var>]
-                        </code>
-                    </dt>
-                    <dd>
-                        表示带有以attr命名的属性，value被包含于html中填写的实际的值，例如匹配abc,acbc,其中bc可以作为上述value
-                    </dd>
-                    <dt>
-                        <code>
-                            [<var>attr</var><var>operate</var><var>value</var>]
-                        </code>
-                    </dt>
-                    <dd>
-                        在属性选择器的右方括号前添加一个用空格隔开的字母 <code>i</code>（或 <code>I</code>），可以在匹配属性值时忽略大小写
-                    </dd>
-                </dl>
-            </li>
-        </ul>
-    </div>
-    <div>
-        <h2>复合选择器 (Combinators)</h2>
-        <ul>
-            <li>
-                <h3>相邻兄弟选择器</h3>
-                <p>介于两个选择器之间，需要两个元素同属一个父元素且相邻</p>
-                <code>
-                    strong + span {
-                        color: red;
-                    }
-                </code>
-                <h4>Result: </h4>
-                <div class="text-indent-2">
-                    <strong>1</strong>
-                    <span>2</span>
-                    <span>3</span>
-                    <strong>4</strong>
-                    <span>5</span>
-                </div>
-            </li>
-            <li>
-                <h3>通用兄弟选择器</h3>
-                <p>位置无须紧邻，只须同层级，<code>A~B</code>选择<code>A</code>元素之后所有同层级<code>B</code>元素。</p>
-                <code>
-                    em ~ span {
-                        color: blue;
-                    }
-                </code>
-                <h4>Result:</h4>
-                <div class="text-indent-2">
-                    <em>1</em>
-                    <span>2</span>
-                    <span>3</span>
-                    <em>4</em>
-                    <span>5</span>
-                </div>
-            </li>
-            <li>
-                <h3>子选择器</h3>
-                <p>匹配第一个元素的子元素，孙元素及以后无法匹配</p>
-                <code>
-                    #showChildSelector div > span {
-                        color: green
-                    }
-                </code>
-                <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class="text-indent-2" id="showChildSelector"&gt;</span><br><span class="line">    &lt;<span class="selector-tag">p</span>&gt;</span><br><span class="line">        &lt;<span class="selector-tag">span</span>&gt;</span><br><span class="line">            1</span><br><span class="line">            &lt;<span class="selector-tag">span</span>&gt;</span><br><span class="line">                2</span><br><span class="line">            &lt;/span&gt;</span><br><span class="line">        &lt;/span&gt;</span><br><span class="line">        &lt;span&gt;3&lt;/span&gt;</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;span&gt;4&lt;/span&gt;</span><br></pre></td></tr></table></figure>
-                <h4>Result: </h4>
-                <div class="text-indent-2" id="showChildSelector">
-                    <p>
-                        <span>
-                            1
-                            <span>
-                                2
-                            </span>
-                        </span>
+        <h1 id="selector_type">选择器类型</h1>
+        <div>
+            <h2 id="basic_selector">基础选择器 (Basic Selectors)</h2>
+            <ul>
+                <li>
+                    <h3 id="type_selector">元素选择器</h3>
+                    <p>通过Node节点匹配元素,在单独使用时,寻找特定类型的元素时,元素选择器都会匹配该文档中所有此类型的元素.</p>
+                    <pre>元素 {样式声明}</pre>
+                </li>
+                <li>
+                    <h3 id="class_selector">类选择器</h3>
+                    <p>CSS类选择器会根据元素的类属性中的内容匹配元素，需要完全匹配，以空白分隔</p>
+                    <pre>.类名 {样式声明}</pre>
+                    <p>类选择器等同于下述：</p>
+                    <pre>[class ~= 类名] {样式声明}</pre>
+                </li>
+                <li>
+                    <h3 id="id_selector">ID选择器</h3>
+                    <p>根据元素中ID属性中的内容匹配元素，需要完全匹配</p>
+                    <pre>#ID {样式声明}</pre>
+                    <p>ID选择器等同于下述:</p>
+                    <pre>[id = id属性的值] {样式声明}</pre>
+                </li>
+                <li>
+                    <h3 id="universal_selector">通配选择器</h3>
+                    <p>可以匹配任何HTML类型的元素，故可省略。在CSS3中，较经典的与命名空间搭配使用</p>
+                    <ul>
+                        <li><code>a|*</code>会匹配a空间下的所有元素</li>
+                        <li><code>|*</code>会匹配所有无命名空间的元素</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3 id="attribute_selector">属性选择器</h3>
+                    <p>根据属性中的内容匹配元素，需要属性值完全匹配</p>
+                    <dl>
+                        <h4 id="attribute_selector_grammer">语法</h4>
+                        <dt>
+                            <code>
+                                [<var>attr</var>]
+                            </code>
+                        </dt>
+                        <dd>表示带有以attr命名的属性的所有元素</dd>
+                        <dt>
+                            <code>
+                                [<var>attr</var>=<var>value</var>]
+                            </code>
+                        </dt>
+                        <dd>
+                            表示带有以attr命名的属性且值等于value的所有元素
+                        </dd>
+                        <dt>
+                            <code>
+                                [<var>attr</var>~=<var>value</var>]
+                            </code>
+                        </dt>
+                        <dd>
+                            表示带有以attr命名的属性，value是以空白分隔的值列表，匹配HTML中该属性的值是值列表之一的元素，例如class,className(类属性选择器)
+                        </dd>
+                        <dt>
+                            <code>
+                                [<var>attr</var>|=<var>value</var>]
+                            </code>
+                        </dt>
+                        <dd>
+                            表示带有以attr命名的属性，value是value或者以value-为前缀的值，例如匹配zh-CN,zh-TW,其中zh可以作为上述value
+                        </dd>
+                        <dt>
+                            <code>
+                                [<var>attr</var>^=<var>value</var>]
+                            </code>
+                        </dt>
+                        <dd>
+                            表示带有以attr命名的属性，value是value为前缀的值，例如匹配zh-CN,zh-TW,其中zh可以作为上述value
+                        </dd>
+                        <dt>
+                            <code>
+                                [<var>attr</var>$=<var>value</var>]
+                            </code>
+                        </dt>
+                        <dd>
+                            表示带有以attr命名的属性，value是value为前缀的值，例如匹配abc,acbc,其中bc可以作为上述value
+                        </dd>
+                        <dt>
+                            <code>
+                                [<var>attr</var>$=<var>value</var>]
+                            </code>
+                        </dt>
+                        <dd>
+                            表示带有以attr命名的属性，value是value为后缀的值，例如匹配abc,acbc,其中bc可以作为上述value
+                        </dd>
+                        <dt>
+                            <code>
+                                [<var>attr</var>*=<var>value</var>]
+                            </code>
+                        </dt>
+                        <dd>
+                            表示带有以attr命名的属性，value被包含于html中填写的实际的值，例如匹配abc,acbc,其中bc可以作为上述value
+                        </dd>
+                        <dt>
+                            <code>
+                                [<var>attr</var><var>operate</var><var>value</var>]
+                            </code>
+                        </dt>
+                        <dd>
+                            在属性选择器的右方括号前添加一个用空格隔开的字母 <code>i</code>（或 <code>I</code>），可以在匹配属性值时忽略大小写
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="combinator">复合选择器 (Combinators)</h2>
+            <ul>
+                <li>
+                    <h3 id="adjacent_sibling_combinator">相邻兄弟选择器</h3>
+                    <p>介于两个选择器之间，需要两个元素同属一个父元素且相邻</p>
+                    <code>
+                        strong + span {
+                            color: red;
+                        }
+                    </code>
+                    <h4 id="result_adjacent_sibling_combinator">Result: </h4>
+                    <div class="text-indent-2 result-box">
+                        <strong>1</strong>
+                        <span>2</span>
                         <span>3</span>
-                    </p>
+                        <strong>4</strong>
+                        <span>5</span>
+                    </div>
+                </li>
+                <li>
+                    <h3 id="general_sibling_combinator">通用兄弟选择器</h3>
+                    <p>位置无须紧邻，只须同层级，<code>A~B</code>选择<code>A</code>元素之后所有同层级<code>B</code>元素。</p>
+                    <code>
+                        em ~ span {
+                            color: blue;
+                        }
+                    </code>
+                    <h4 id="result_general_sibling_combinator">Result:</h4>
+                    <div class="text-indent-2">
+                        <em>1</em>
+                        <span>2</span>
+                        <span>3</span>
+                        <em>4</em>
+                        <span>5</span>
+                    </div>
+                </li>
+                <li>
+                    <h3 id="child_combinator">子选择器</h3>
+                    <p>匹配第一个元素的子元素，孙元素及以后无法匹配</p>
+                    <code>
+                        #show_child_selector div > span {
+                            color: green
+                        }
+                    </code>
+                    <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class="text-indent-2" id="show_child_selector"&gt;</span><br><span class="line">    &lt;<span class="selector-tag">p</span>&gt;</span><br><span class="line">        &lt;<span class="selector-tag">span</span>&gt;</span><br><span class="line">            1</span><br><span class="line">            &lt;<span class="selector-tag">span</span>&gt;</span><br><span class="line">                2</span><br><span class="line">            &lt;/span&gt;</span><br><span class="line">        &lt;/span&gt;</span><br><span class="line">        &lt;span&gt;3&lt;/span&gt;</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;span&gt;4&lt;/span&gt;</span><br></pre></td></tr></table></figure>
+                    <h4 id="result_child_combinator">Result: </h4>
+                    <div class="text-indent-2 result-box" id="show_child_selector">
+                        <p>
+                            <span>
+                                1
+                                <span>
+                                    2
+                                </span>
+                            </span>
+                            <span>3</span>
+                        </p>
+                    </div>
                     <p>                        
                         注意此处若没有给二级span加样式则会继承一级span的样式
                     </p>
-                </div>
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="pseudo_classes">伪类 (Pseudo Classes)</h2>
+            <ul>
+                <li>
+                    <h3>常用的伪类</h3>
+                    <dl>
+                        <dt>
+                            <code>:link</code>
+                        </dt>
+                        <dd>
+                            匹配未被访问，且有href属性的a标签
+                        </dd>
+                        <dt>
+                            <code>:visited</code>
+                        </dt>
+                        <dd>
+                            匹配已被访问的链接
+                        </dd>
+                        <dt>
+                            <code>:hover</code>
+                        </dt>
+                        <dd>
+                            匹配光标所在的元素
+                        </dd>
+                        <dt>
+                            <code>:active</code>
+                        </dt>
+                        <dd>
+                            匹配已操作过，比如按钮按下过鼠标左键等
+                        </dd>
+                        <dt>
+                            <code>:first-child</code>
+                        </dt>
+                        <dd>
+                            表示一组同级元素中的第一个元素
+                        </dd>
+                        <dt>
+                            <code>:first-of-type</code>
+                        </dt>
+                        <dd>
+                            表示该标签下面的第一个标签元素
+                        </dd>
+                        <dt>
+                            <code>:last-child</code>                        
+                        </dt>
+                        <dd>
+                            表示一组同级元素中的最后一个元素
+                        </dd>
+                        <dt>
+                            <code>:last-of-type</code>
+                        </dt>
+                        <dd>
+                            表示该标签下面的最后一个标签元素
+                        </dd>
+                        <dt>
+                            <code>:not</code>
+                        </dt>
+                        <dd>
+                            表示与选择器列表不匹配的元素
+                        </dd>
+                        <dt>
+                            <code>:target</code>
+                        </dt>
+                        <dd>
+                            通过a标签的href属性与之对应id元素匹配
+                        </dd>
+                    </dl>
+                    <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#pseudo_classes</span> <span class="selector-tag">a</span><span class="selector-pseudo">:link</span> &#123; <span class="attribute">color</span>: blue; &#125;</span><br><span class="line"><span class="selector-id">#pseudo_classes</span> <span class="selector-tag">a</span><span class="selector-pseudo">:visited</span> &#123; <span class="attribute">color</span>: purple; &#125;</span><br><span class="line"><span class="selector-id">#pseudo_classes</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123; <span class="attribute">background</span>: yellow; &#125;</span><br><span class="line"><span class="selector-id">#pseudo_classes</span> <span class="selector-tag">a</span><span class="selector-pseudo">:active</span> &#123; <span class="attribute">color</span>: red; &#125;</span><br><span class="line"><span class="selector-id">#pseudo_classes</span> <span class="selector-tag">p</span><span class="selector-pseudo">:first-child</span> &#123; <span class="attribute">background</span>: <span class="number">#f2efea</span>; &#125;</span><br><span class="line"><span class="selector-id">#pseudo_classes</span> <span class="selector-tag">div</span>: <span class="selector-tag">first-of-type</span> &#123;<span class="attribute">background</span>: green&#125; </span><br><span class="line"><span class="selector-id">#pseudo_classes</span> <span class="selector-tag">not</span>(<span class="selector-tag">p</span>) &#123;<span class="attribute">text-decoration</span>: underline&#125;</span><br></pre></td></tr></table></figure>
+                    <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"pseudo_classes"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span>&gt;</span>test1<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>test2<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>test3<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>test4<span class="tag">&lt;<span class="name">span</span>&gt;</span>test5<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>test6<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+                    <h4 id="result_pseudo_classes">Result: </h4>
+                    <div id="pseudo_classes" class="text-indent-2 result-box">
+                        <a>test1</a>
+                        <a href="#">test2</a>
+                        <a href="https://www.bilibili.com" target="_blank" rel="noopener">test3</a>
+                        <p>test4<span>test5</span></p>
+                        <p>test6</p>
+                    </div>
+                    <p>注意：这里面first-child与first-of-type优先级一样所以被覆盖了</p>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2 id="pseudo_elements">伪元素 (Pseudo Elements)</h2>
+            <ul>
+                <li>
+                    <h3>常用的伪元素</h3>
+                    <dl>
+                        <dt>
+                            <code>::before</code>
+                        </dt>
+                        <dd>
+                            在选中的元素前添加样式声明
+                        </dd>
+                        <dt>
+                            <code>::after</code>
+                        </dt>
+                        <dd>
+                            在选中的元素后添加样式声明
+                        </dd>
+                    </dl>
+                    <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> list = <span class="built_in">document</span>.querySelector(<span class="string">'#peseudo_elements_ul'</span>)</span><br><span class="line">list.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">current</span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(current,<span class="string">'current'</span>,current.target)</span><br><span class="line"><span class="keyword">if</span>( current.target.tagName === <span class="string">'LI'</span>) &#123;</span><br><span class="line">current.target.classList.toggle(<span class="string">'done'</span>)</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+                    <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">list-style-type</span>: none;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0.5em</span> <span class="number">0.5em</span> <span class="number">0.5em</span> <span class="number">2em</span>;</span><br><span class="line">    <span class="attribute">background</span>: lightgrey;</span><br><span class="line">    <span class="attribute">font-family</span>: sans-serif;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="selector-tag">li</span><span class="selector-class">.done</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#CCFF99</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="selector-tag">li</span><span class="selector-class">.done</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">border-color</span>: <span class="number">#009933</span>;</span><br><span class="line">    <span class="attribute">border-style</span>: solid;</span><br><span class="line">    <span class="attribute">border-width</span>: <span class="number">0</span> <span class="number">0.3em</span> <span class="number">0.25em</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">1em</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">1.3em</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0.6em</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: -<span class="number">1em</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">45deg</span>);</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">0.5em</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">li</span><span class="selector-class">.done</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      <span class="attribute">content</span>: <span class="string">'加油吧骚年！'</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+                    <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"peseudo_elements_ul"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Buy milk<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Take the dog for a walk<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Exercise<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Write code<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Play music<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Relax<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+                    <ul id="peseudo_elements_ul">
+                        <li>Buy milk</li>
+                        <li>Take the dog for a walk</li>
+                        <li>Exercise</li>
+                        <li>Write code</li>
+                        <li>Play music</li>
+                        <li>Relax</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <h1 id="selector_specificity">CSS选择器的优先级</h1>
+        <div>
+            <h2>计算优先级</h2>
+            <p>CSS是通过进位制计算的优先级，<Strong>(ID，类，标签)</Strong>,为了好做计算，分别将其对应为（a,b,c）</p>
+            <ol>
+                <li>a是id选择器的次数</li>
+                <li>b是类选择器，属性选择器（排除ID选择器和标签选择器），伪类的次数</li>
+                <li>c是标签选择器以及伪元素的次数</li>
+            </ol>
+            <p><strong>当前选择器的优先级权重 </strong>= a * 100 + b * 10 + c * 1</p>
+            <p>此刻选择器的优先级比较已经出现了，权重值大的优先，权重值相等后声明的优先。</p>
+            <p>当然，还有其他两个我个人很不推荐的影响优先级的方法。其中一个是<strong>内联</strong>，一个是<code>!important</code>,如果当前选择器有内联样式，则其内联样式声明优先级比选择器里面的样式声明要高，而其中有<code>!important</code>的样式优先级最高。从之前也可以推出内联里面的<code>！important</code>比选择器里的<code>！important</code>优先级高</p>
+        </div>
     </div>
 </main>
 <footer>
 
 </footer>
+<script>
+let list = document.querySelector('#peseudo_elements_ul')
+list.addEventListener('click',function(current) {
+if( current.target.tagName === 'LI') {
+current.target.classList.toggle('done')
+}
+})
+</script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/24/JavaScript%E7%9A%84%E5%BC%82%E6%AD%A5%E6%9C%BA%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="涯渊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Y.Y's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/24/JavaScript%E7%9A%84%E5%BC%82%E6%AD%A5%E6%9C%BA%E5%88%B6/" itemprop="url">JavaScript的异步机制</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-24T14:06:04+08:00">
+                2020-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <style>
+.green .light{
+    background-color: green;
+}
+.yellow .light{
+    background-color: green;
+}
+.red .light{
+    background-color: green;
+}
+</style>
+<html>
+    <header>
+        <title>JavaScript的异步机制</title>
+    </header>
+    <main>
+        <div>
+            <h2>Asynchronous Callbacks</h2>
+            <p>经典的callback(回调)模式存在层级嵌套的问题，如果你对node.js有一定了解一定会听过所谓的callback-hell(回调地狱）,增加了运行时间以及嵌套层级。是此前JavaScript唯一的异步处理方法。</p>
+        <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">go</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    green()</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    yellow()</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        red()</span><br><span class="line">            setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            go();</span><br><span class="line">            &#125;,<span class="number">5000</span>)</span><br><span class="line">        &#125;,<span class="number">2000</span>)</span><br><span class="line">    &#125;,<span class="number">10000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  
+    </div>       
+    <div>
+        <h2>Promise</h2>
+        <p>promise则通过一种链式表达的方式代替了回调的方式。可在运行异步操作并等待其完全完成后再根据其结果运行另一项操作</p>
+        <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">t</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        setTimeout(resolve,t)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">go</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    green()</span><br><span class="line">    sleep(<span class="number">1000</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        yellow();</span><br><span class="line">        <span class="keyword">return</span> sleep(<span class="number">200</span>);</span><br><span class="line">    &#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        red();</span><br><span class="line">        <span class="keyword">return</span> sleep(<span class="number">500</span>);</span><br><span class="line">    &#125;).then(go);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+    <div>
+        <h2>async/await</h2>
+        <p>异步函数由<code>async</code>关键字定义。在一个异步函数中可以使用<code>await</code>关键字。<code>async</code>和<code>await</code>关键字可以使得对有等待时间的（异步），以<a class="code-underline" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="noopener"><code>Promise</code></a>为基础的函数的定义更加简洁优雅，减少特意配置对于<code>Promise</code>的链式调用。</p>
+        <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">go</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    green();</span><br><span class="line">    <span class="keyword">await</span> sleep(<span class="number">1000</span>);</span><br><span class="line">    yellow();</span><br><span class="line">    <span class="keyword">await</span> sleep(<span class="number">2000</span>);</span><br><span class="line">    red();</span><br><span class="line">    <span class="keyword">await</span> sleep(<span class="number">5000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+    </div>
+
+    <div class="green"></div>
+    <div class="red"></div>
+    <div class="yellow"></div>
+    </main>
+</html>
+<script>
+    function green(){
+        var lights = document.getElementsByTagName('div');
+        for(var i = 0;i < 3;i++)
+            lights[i].classList.remove('light');
+        document.getElementsByClassName('green')[0].classList.add('light');
+    }
+    function red(){
+        var lights = document.getElementsByTagName('div');
+        for(var i = 0;i < 3;i++)
+            lights[i].classList.remove('light');
+        document.getElementsByClassName('red')[0].classList.add('light');
+    }
+    function yellow(){
+        var lights = document.getElementsByTagName('div');
+        for(var i = 0;i < 3;i++)
+            lights[i].classList.remove('light');
+        document.getElementsByClassName('yellow')[0].classList.add('light');
+    }
+    function go() {
+        green()
+        setTimeout(function(){
+            yellow()
+            setTimeout(function(){
+                red()
+                setTimeout(function(){
+                    go();
+                },5000)
+            },2000)
+        },10000)
+    }
+</script>
           
         
       
@@ -1073,218 +1460,6 @@
 不由衷。
 </text>
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/24/JavaScript%E7%9A%84%E5%BC%82%E6%AD%A5%E6%9C%BA%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="涯渊">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Y.Y's BLOG">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/24/JavaScript%E7%9A%84%E5%BC%82%E6%AD%A5%E6%9C%BA%E5%88%B6/" itemprop="url">JavaScript的异步机制</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-24T14:06:04+08:00">
-                2019-09-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">javascript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <style>
-.green .light{
-    background-color: green;
-}
-.yellow .light{
-    background-color: green;
-}
-.red .light{
-    background-color: green;
-}
-</style>
-<html>
-    <header>
-        <title>JavaScript的异步机制</title>
-    </header>
-    <main>
-        <div>
-            <h2>Asynchronous Callbacks</h2>
-            <p>经典的callback(回调)模式存在层级嵌套的问题，如果你对node.js有一定了解一定会听过所谓的callback-hell(回调地狱）,增加了运行时间以及嵌套层级。是此前JavaScript唯一的异步处理方法。</p>
-        <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">go</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    green()</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    yellow()</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        red()</span><br><span class="line">            setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            go();</span><br><span class="line">            &#125;,<span class="number">5000</span>)</span><br><span class="line">        &#125;,<span class="number">2000</span>)</span><br><span class="line">    &#125;,<span class="number">10000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-  
-    </div>       
-    <div>
-        <h2>Promise</h2>
-        <p>promise则通过一种链式表达的方式代替了回调的方式。可在运行异步操作并等待其完全完成后再根据其结果运行另一项操作</p>
-        <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">t</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        setTimeout(resolve,t)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">go</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    green()</span><br><span class="line">    sleep(<span class="number">1000</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        yellow();</span><br><span class="line">        <span class="keyword">return</span> sleep(<span class="number">200</span>);</span><br><span class="line">    &#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        red();</span><br><span class="line">        <span class="keyword">return</span> sleep(<span class="number">500</span>);</span><br><span class="line">    &#125;).then(go);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-    </div>
-    <div>
-        <h2>async/await</h2>
-        <p>异步函数由<code>async</code>关键字定义。在一个异步函数中可以使用<code>await</code>关键字。<code>async</code>和<code>await</code>关键字可以使得对有等待时间的（异步），以<a class="code-underline" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="noopener"><code>Promise</code></a>为基础的函数的定义更加简洁优雅，减少特意配置对于<code>Promise</code>的链式调用。</p>
-        <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">go</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    green();</span><br><span class="line">    <span class="keyword">await</span> sleep(<span class="number">1000</span>);</span><br><span class="line">    yellow();</span><br><span class="line">    <span class="keyword">await</span> sleep(<span class="number">2000</span>);</span><br><span class="line">    red();</span><br><span class="line">    <span class="keyword">await</span> sleep(<span class="number">5000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-    </div>
-
-    <div class="green"></div>
-    <div class="red"></div>
-    <div class="yellow"></div>
-    </main>
-</html>
-<script>
-    function green(){
-        var lights = document.getElementsByTagName('div');
-        for(var i = 0;i < 3;i++)
-            lights[i].classList.remove('light');
-        document.getElementsByClassName('green')[0].classList.add('light');
-    }
-    function red(){
-        var lights = document.getElementsByTagName('div');
-        for(var i = 0;i < 3;i++)
-            lights[i].classList.remove('light');
-        document.getElementsByClassName('red')[0].classList.add('light');
-    }
-    function yellow(){
-        var lights = document.getElementsByTagName('div');
-        for(var i = 0;i < 3;i++)
-            lights[i].classList.remove('light');
-        document.getElementsByClassName('yellow')[0].classList.add('light');
-    }
-    function go() {
-        green()
-        setTimeout(function(){
-            yellow()
-            setTimeout(function(){
-                red()
-                setTimeout(function(){
-                    go();
-                },5000)
-            },2000)
-        },10000)
-    }
-</script>
           
         
       
