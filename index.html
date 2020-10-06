@@ -258,6 +258,200 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/30/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95--%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="涯渊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Y.Y's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/30/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95--%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/" itemprop="url">广度优先算法--自动寻路</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-30T14:15:14+08:00">
+                2020-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <div id="container">
+</div>
+<button class="primary-button" onclick="localStorage['map'] = JSON.stringify(map)">
+    save
+</button>
+<button class="default-button">
+    clear
+</button>
+<script>
+    let map = localStorage['map'] ? JSON.parse(localStorage['map']) : Array(10000).fill(0);
+    let container = document.getElementById('container');
+    for(let x = 0; x < 100; x++) {
+        for (let y = 0; y < 100; y++) {
+            let cell = document.createElement('div');
+            cell.classList.add("cell");
+            if (map[100*y + x] === 1) {
+                cell.classList.toggle('bg-black');
+            }
+            cell.addEventListener('mousemove', ()=> {
+                if (mousedown) {
+                    if (clear) {
+                        cell.classList.toggle('bg-gray');
+                        map[100*y + x] = 0;
+                    } else {
+                        cell.classList.toggle('bg-black');
+                        map[100*y + x] = 1;
+                    }
+                }
+            })
+            container.appendChild(cell);
+        }
+    }
+    let mousedown = false;
+    let clear = false;
+    document.addEventListener('mousedown', e=> {
+        if (e.target.classList[0] == "default-button") {
+            localStorage['map'] = JSON.stringify(Array(10000).fill(0));
+            let allSelected = document.querySelectorAll('.bg-black');
+            for (let i = 0; i< allSelected.length; i++) {
+                allSelected[i].classList.remove('bg-black');
+                allSelected[i].classList.add('bg-gray');
+            }
+        }
+        mousedown = true;
+        clear = (e.which === 3)
+    })
+    document.addEventListener('mouseup', () => {
+        mousedown = false;
+    })
+    document.addEventListener('contextmenu', e => e.preventDefault())
+    function path(map,start,end) {
+        var queue = [start];
+        function insert (x,y) {
+            if (x < 0 || y < 0 || x >= 100 || y >= 100) {
+                return ;
+            }
+            if (map[100*y+x]) {
+                return ;
+            }
+            map[100*y+x] = -1;
+            queue.push([x,y]);
+        }
+        while (queue.length) {
+            let [x,y] = queue.shift();
+            console.log(x,y);
+            if (x === end[0] && y === end[1]) {
+                console.log('true')
+                return true;
+            }
+            insert(x-1,y);
+            insert(x+1,y);
+            insert(x,y-1);
+            insert(x,y+1);
+        }
+    }
+</script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/28/%E5%85%B3%E4%BA%8ECSS%E9%80%89%E6%8B%A9%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -398,7 +592,7 @@
       width: 0.5em;
     }
     li.done::after {
-        content: " 加油吧骚年!";
+        content: " 再点击恢复";
     }
 </style>
 <header>
@@ -486,7 +680,7 @@
                             </code>
                         </dt>
                         <dd>
-                            表示带有以attr命名的属性，value是value为前缀的值，例如匹配abc,acbc,其中bc可以作为上述value
+                            表示带有以attr命名的属性，value是value为后缀的值，例如匹配abc,acbc,其中bc可以作为上述value
                         </dd>
                         <dt>
                             <code>
@@ -584,7 +778,7 @@
             <h2 id="pseudo_classes">伪类 (Pseudo Classes)</h2>
             <ul>
                 <li>
-                    <h3>常用的伪类</h3>
+                    <h3 id="common_pseudo_classes">常用的伪类</h3>
                     <dl>
                         <dt>
                             <code>:link</code>
@@ -665,7 +859,7 @@
             <h2 id="pseudo_elements">伪元素 (Pseudo Elements)</h2>
             <ul>
                 <li>
-                    <h3>常用的伪元素</h3>
+                    <h3 id="common_pseudo_elements">常用的伪元素</h3>
                     <dl>
                         <dt>
                             <code>::before</code>
@@ -681,7 +875,7 @@
                         </dd>
                     </dl>
                     <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> list = <span class="built_in">document</span>.querySelector(<span class="string">'#peseudo_elements_ul'</span>)</span><br><span class="line">list.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">current</span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(current,<span class="string">'current'</span>,current.target)</span><br><span class="line"><span class="keyword">if</span>( current.target.tagName === <span class="string">'LI'</span>) &#123;</span><br><span class="line">current.target.classList.toggle(<span class="string">'done'</span>)</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-                    <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">list-style-type</span>: none;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0.5em</span> <span class="number">0.5em</span> <span class="number">0.5em</span> <span class="number">2em</span>;</span><br><span class="line">    <span class="attribute">background</span>: lightgrey;</span><br><span class="line">    <span class="attribute">font-family</span>: sans-serif;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="selector-tag">li</span><span class="selector-class">.done</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#CCFF99</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="selector-tag">li</span><span class="selector-class">.done</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">border-color</span>: <span class="number">#009933</span>;</span><br><span class="line">    <span class="attribute">border-style</span>: solid;</span><br><span class="line">    <span class="attribute">border-width</span>: <span class="number">0</span> <span class="number">0.3em</span> <span class="number">0.25em</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">1em</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">1.3em</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0.6em</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: -<span class="number">1em</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">45deg</span>);</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">0.5em</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">li</span><span class="selector-class">.done</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      <span class="attribute">content</span>: <span class="string">'加油吧骚年！'</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+                    <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">list-style-type</span>: none;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0.5em</span> <span class="number">0.5em</span> <span class="number">0.5em</span> <span class="number">2em</span>;</span><br><span class="line">    <span class="attribute">background</span>: lightgrey;</span><br><span class="line">    <span class="attribute">font-family</span>: sans-serif;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="selector-tag">li</span><span class="selector-class">.done</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#CCFF99</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="selector-tag">li</span><span class="selector-class">.done</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">border-color</span>: <span class="number">#009933</span>;</span><br><span class="line">    <span class="attribute">border-style</span>: solid;</span><br><span class="line">    <span class="attribute">border-width</span>: <span class="number">0</span> <span class="number">0.3em</span> <span class="number">0.25em</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">1em</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">1.3em</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0.6em</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: -<span class="number">1em</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">45deg</span>);</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">0.5em</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">li</span><span class="selector-class">.done</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      <span class="attribute">content</span>: <span class="string">'再点击恢复'</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
                     <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"peseudo_elements_ul"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Buy milk<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Take the dog for a walk<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Exercise<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Write code<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Play music<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Relax<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
                     <ul id="peseudo_elements_ul">
                         <li>Buy milk</li>
@@ -698,7 +892,7 @@
     <div>
         <h1 id="selector_specificity">CSS选择器的优先级</h1>
         <div>
-            <h2>计算优先级</h2>
+            <h2 id="compute_specificity">计算优先级</h2>
             <p>CSS是通过进位制计算的优先级，<Strong>(ID，类，标签)</Strong>,为了好做计算，分别将其对应为（a,b,c）</p>
             <ol>
                 <li>a是id选择器的次数</li>
@@ -1659,7 +1853,7 @@ current.target.classList.toggle('done')
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

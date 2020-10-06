@@ -1822,7 +1822,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff211a;
+  background: #ff5039;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2636,6 +2636,33 @@ dd {
 [id^="result"] + div:hover {
   background-color: #fff;
 }
+[class$="button"] {
+  box-shadow: 0 2px 0 rgba(0,0,0,0.045);
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.12);
+}
+.primary-button {
+  background-color: #1890ff;
+  color: #fff;
+}
+.default-button {
+  background-color: #fff;
+  color: #000;
+}
+[class$="button"] {
+  box-shadow: 0 2px 0 rgba(0,0,0,0.045);
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.12);
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  font-weight: 400;
+  text-align: center;
+  opacity: 0.8;
+}
+.bg-black {
+  background-color: #000;
+}
+.bg-gray {
+  background-color: #808080;
+}
 .main-inner {
   margin-top: 80px;
 }
@@ -2939,4 +2966,18 @@ dd {
 }
 .code-underline {
   text-decoration: underline #00f;
+}
+.cell {
+  display: inline-block;
+  line-height: 7px;
+  width: 6px;
+  height: 6px;
+  background-color: #808080;
+  border-bottom: solid 1px #fff;
+  border-right: solid 1px #fff;
+  vertical-align: middle;
+}
+#container {
+  width: 701px;
+  line-height: 0;
 }
