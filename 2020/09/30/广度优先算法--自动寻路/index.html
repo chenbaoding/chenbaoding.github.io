@@ -79,14 +79,14 @@
 
 
 
-<meta name="description" content="save       clear       let map &#x3D; localStorage[&#39;map&#39;] ? JSON.parse(localStorage[&#39;map&#39;]) : Array(10000).fill(0);     let container &#x3D; document.getElementById(&#39;container&#39;);     for(let x &#x3D; 0; x &lt; 1">
+<meta name="description" content=".cell {         display:inline-block;         line-height: 7px;         width: 6px;         height: 6px;         background-color: gray;         border-bottom: solid 1px white;         border-rig">
 <meta property="og:type" content="article">
 <meta property="og:title" content="广度优先算法--自动寻路">
 <meta property="og:url" content="http://yoursite.com/2020/09/30/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95--%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/index.html">
 <meta property="og:site_name" content="Y.Y&#39;s BLOG">
-<meta property="og:description" content="save       clear       let map &#x3D; localStorage[&#39;map&#39;] ? JSON.parse(localStorage[&#39;map&#39;]) : Array(10000).fill(0);     let container &#x3D; document.getElementById(&#39;container&#39;);     for(let x &#x3D; 0; x &lt; 1">
+<meta property="og:description" content=".cell {         display:inline-block;         line-height: 7px;         width: 6px;         height: 6px;         background-color: gray;         border-bottom: solid 1px white;         border-rig">
 <meta property="article:published_time" content="2020-09-30T06:15:14.991Z">
-<meta property="article:modified_time" content="2020-10-06T17:59:57.098Z">
+<meta property="article:modified_time" content="2020-10-06T18:11:22.069Z">
 <meta property="article:author" content="涯渊">
 <meta name="twitter:card" content="summary">
 
@@ -336,7 +336,29 @@
       
 
       
-        <div id="container">
+        <style>
+    .cell {
+        display:inline-block;
+        line-height: 7px;
+        width: 6px;
+        height: 6px;
+        background-color: gray;
+        border-bottom: solid 1px white;
+        border-right: solid 1px white;
+        vertical-align: middle;
+    }
+    #container{
+        width: 701px;
+        line-height: 0;
+    }
+    .bg-black {
+        background-color: black;
+    }
+    .bg-gray {
+        background-color: gray;
+    }
+</style>
+<div id="container">
 </div>
 <button class="primary-button" onclick="localStorage['map'] = JSON.stringify(map)">
     save
@@ -386,7 +408,12 @@
         mousedown = false;
     })
     document.addEventListener('contextmenu', e => e.preventDefault())
-    function path(map,start,end) {
+    function sleep(t) {
+        return new Promise((resolve) => {
+            setTimeout(resolve,t);
+        } , reject)
+    }
+    async function path(map,start,end) {
         var queue = [start];
         function insert (x,y) {
             if (x < 0 || y < 0 || x >= 100 || y >= 100) {

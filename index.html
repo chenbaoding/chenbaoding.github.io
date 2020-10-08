@@ -329,7 +329,29 @@
       
         
           
-            <div id="container">
+            <style>
+    .cell {
+        display:inline-block;
+        line-height: 7px;
+        width: 6px;
+        height: 6px;
+        background-color: gray;
+        border-bottom: solid 1px white;
+        border-right: solid 1px white;
+        vertical-align: middle;
+    }
+    #container{
+        width: 701px;
+        line-height: 0;
+    }
+    .bg-black {
+        background-color: black;
+    }
+    .bg-gray {
+        background-color: gray;
+    }
+</style>
+<div id="container">
 </div>
 <button class="primary-button" onclick="localStorage['map'] = JSON.stringify(map)">
     save
@@ -379,7 +401,12 @@
         mousedown = false;
     })
     document.addEventListener('contextmenu', e => e.preventDefault())
-    function path(map,start,end) {
+    function sleep(t) {
+        return new Promise((resolve) => {
+            setTimeout(resolve,t);
+        } , reject)
+    }
+    async function path(map,start,end) {
         var queue = [start];
         function insert (x,y) {
             if (x < 0 || y < 0 || x >= 100 || y >= 100) {
