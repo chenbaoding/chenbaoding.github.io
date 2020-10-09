@@ -350,9 +350,14 @@
     .bg-gray {
         background-color: gray;
     }
+    .bg-lightgreen {
+        background-color: lightgreen;
+    }
+    .bg-purple {
+        background-color: purple;
+    }
 </style>
-<div id="container">
-</div>
+<div id="container"></div>
 <button class="primary-button" onclick="localStorage['map'] = JSON.stringify(map)">
     save
 </button>
@@ -360,6 +365,31 @@
     clear
 </button>
 <script>
+    class Sorted {
+        constructor(data,compare){
+            this.data = data.slice();
+            this.compare = compare || ((a,b) => a-b)
+        }
+        take(){
+            if (!this.data.length){
+                return;
+            }
+            let min = this.data[0];
+            let minIndex = 0;
+            for (let i = 1;i < this.data.length; i++) {
+                if (this.compare(this.data[i],min)<0) {
+                    min = this.data[i];
+                    minIndex = i;
+                }
+            }
+            this.data[minIndex] = this.data[this.data.length - 1];
+            this.data.pop();
+            return min;
+        }
+        give(v) {
+            this.data.push(v);
+        }
+    }
     let map = localStorage['map'] ? JSON.parse(localStorage['map']) : Array(10000).fill(0);
     let container = document.getElementById('container');
     for(let x = 0; x < 100; x++) {
@@ -367,15 +397,15 @@
             let cell = document.createElement('div');
             cell.classList.add("cell");
             if (map[100*y + x] === 1) {
-                cell.classList.toggle('bg-black');
+                cell.classList.add('bg-black');
             }
             cell.addEventListener('mousemove', ()=> {
                 if (mousedown) {
                     if (clear) {
-                        cell.classList.toggle('bg-gray');
+                        cell.classList.remove('bg-black');
                         map[100*y + x] = 0;
                     } else {
-                        cell.classList.toggle('bg-black');
+                        cell.classList.add('bg-black');
                         map[100*y + x] = 1;
                     }
                 }
@@ -388,10 +418,21 @@
     document.addEventListener('mousedown', e=> {
         if (e.target.classList[0] == "default-button") {
             localStorage['map'] = JSON.stringify(Array(10000).fill(0));
+            map = Array(10000).fill(0);
             let allSelected = document.querySelectorAll('.bg-black');
             for (let i = 0; i< allSelected.length; i++) {
                 allSelected[i].classList.remove('bg-black');
                 allSelected[i].classList.add('bg-gray');
+            }
+            let allSelectdPath = document.querySelectorAll('.bg-lightgreen');
+            for (let i = 0; i< allSelectdPath.length; i++){
+                allSelectdPath[i].classList.remove('bg-lightgreen');
+                allSelectdPath[i].classList.add('bg-gray');
+            }
+            let currentPath = document.querySelectorAll('.bg-purple');
+            for (let i = 0; i< currentPath.length; i++){
+                currentPath[i].classList.remove('bg-purple');
+                currentPath[i].classList.add('bg-gray');
             }
         }
         mousedown = true;
@@ -404,31 +445,44 @@
     function sleep(t) {
         return new Promise((resolve) => {
             setTimeout(resolve,t);
-        } , reject)
+        })
     }
-    async function path(map,start,end) {
+    async function findPath(map,start,end) {
+        let table = Object.create(map);
         var queue = [start];
-        function insert (x,y) {
+        async function insert (x,y,pre) {
             if (x < 0 || y < 0 || x >= 100 || y >= 100) {
                 return ;
             }
-            if (map[100*y+x]) {
+            if (table[100*y+x]) {
                 return ;
             }
+            await sleep(1);
+            container.children[y*100 + x].classList.add('bg-lightgreen')
+            table[y*100 + x] = pre;
             map[100*y+x] = -1;
             queue.push([x,y]);
         }
         while (queue.length) {
             let [x,y] = queue.shift();
-            console.log(x,y);
             if (x === end[0] && y === end[1]) {
-                console.log('true')
-                return true;
+                let path = [];
+                while (x !== start[0] || y !== start[1]) {
+                    console.log(x,y)
+                    container.children[y*100 + x].classList.add('bg-purple');
+                    path.push(map[y*100 + x]);
+                    [x,y] = table[y*100 + x];
+                }
+                return path;
             }
-            insert(x-1,y);
-            insert(x+1,y);
-            insert(x,y-1);
-            insert(x,y+1);
+            await insert(x-1,y,[x,y]);
+            await insert(x+1,y,[x,y]);
+            await insert(x,y-1,[x,y]);
+            await insert(x,y+1,[x,y]);
+            await insert(x-1,y-1,[x,y]);
+            await insert(x+1,y+1,[x,y]);
+            await insert(x+1,y-1,[x,y]);
+            await insert(x-1,y+1,[x,y]);
         }
     }
 </script>
