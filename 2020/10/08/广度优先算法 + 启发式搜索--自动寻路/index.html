@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="实验," />
 
 
 
@@ -81,13 +81,14 @@
 
 <meta name="description" content=".cell {         display:inline-block;         line-height: 7px;         width: 6px;         height: 6px;         background-color: gray;         border-bottom: solid 1px white;         border-rig">
 <meta property="og:type" content="article">
-<meta property="og:title" content="广度优先算法--自动寻路">
-<meta property="og:url" content="http://yoursite.com/2020/09/30/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95--%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/index.html">
+<meta property="og:title" content="地图编辑器(广度优先算法 + 启发式搜索)">
+<meta property="og:url" content="http://yoursite.com/2020/10/08/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95%20+%20%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2--%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/index.html">
 <meta property="og:site_name" content="Y.Y&#39;s BLOG">
 <meta property="og:description" content=".cell {         display:inline-block;         line-height: 7px;         width: 6px;         height: 6px;         background-color: gray;         border-bottom: solid 1px white;         border-rig">
-<meta property="article:published_time" content="2020-09-30T06:15:14.991Z">
-<meta property="article:modified_time" content="2020-10-08T18:54:32.854Z">
+<meta property="article:published_time" content="2020-10-08T06:06:04.000Z">
+<meta property="article:modified_time" content="2020-10-10T02:23:49.211Z">
 <meta property="article:author" content="涯渊">
+<meta property="article:tag" content="实验">
 <meta name="twitter:card" content="summary">
 
 
@@ -118,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/09/30/广度优先算法--自动寻路/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/10/08/广度优先算法 + 启发式搜索--自动寻路/"/>
 
 
 
 
 
-  <title>广度优先算法--自动寻路 | Y.Y's BLOG</title>
+  <title>地图编辑器(广度优先算法 + 启发式搜索) | Y.Y's BLOG</title>
   
 
 
@@ -259,7 +260,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/30/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95--%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/08/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95%20+%20%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2--%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="涯渊">
@@ -276,7 +277,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">广度优先算法--自动寻路</h2>
+          <h2 class="post-title" itemprop="name headline">地图编辑器(广度优先算法 + 启发式搜索)</h2>
         
 
         <div class="post-meta">
@@ -288,8 +289,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-30T14:15:14+08:00">
-                2020-09-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-08T14:06:04+08:00">
+                2020-10-08
               </time>
             
 
@@ -299,6 +300,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%9E%E9%AA%8C/" itemprop="url" rel="index">
+                    <span itemprop="name">实验</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -307,8 +330,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/09/30/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95--%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2020/09/30/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95--%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/" itemprop="commentsCount"></span>
+                <a href="/2020/10/08/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95%20+%20%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2--%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2020/10/08/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95%20+%20%E5%90%AF%E5%8F%91%E5%BC%8F%E6%90%9C%E7%B4%A2--%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -465,7 +488,8 @@
                 return ;
             }
             await sleep(1);
-            container.children[y*100 + x].classList.add('bg-lightgreen')
+            // container.children[y*100 + x].style.backgroundColor = ('lightgreen')
+            // container.children[y*100 + x].classList.add('bg-lightgreen')
             table[y*100 + x] = pre;
             map[100*y+x] = -1;
             queue.push([x,y]);
@@ -506,6 +530,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%AE%9E%E9%AA%8C/" rel="tag"># 实验</a>
+          
+        </div>
       
 
       
@@ -610,7 +640,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -621,7 +651,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
